@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./index.css">
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/neutraface-text" rel="stylesheet">
@@ -15,7 +16,6 @@
         <div class="container">
             <div class="first-header">
                 <h2 class="header-logo">BrandComputers</h2>
-                <input placeholder="Пошук" class="header-search" type="text">
                 <h2 class="header-phone">38000000000</h2>
             </div>
         </div>
@@ -23,16 +23,16 @@
             <div class="container down-header-container">
                 <ul class="second-header-list">
                     <li class="second-header-item">
-                        <h2 class="second-header-text">Всі Товари</h2>
+                        <a class="second-header-text second-header-line" href="#products">Всі Товари</a>
                     </li>
                     <li class="second-header-item">
-                        <h2 class="second-header-text">Комп'ютери</h2>
+                        <a class="second-header-text" href="#products" data-category="pc">Комп'ютери</a>
                     </li>
                     <li class="second-header-item">
-                        <h2 class="second-header-text">Ноутбуки</h2>
+                        <a class="second-header-text" href="#products" data-category="laptop">Ноутбуки</a>
                     </li>
                     <li class="second-header-item">
-                        <h2 class="second-header-text">Аксесуари</h2>
+                        <a class="second-header-text" href="#products" data-category="accessory">Аксесуари</a>
                     </li>
                 </ul>
                 <h2 class="second-header-title">Lorem Ipsum Lorem Ipsum!</h2>
@@ -62,74 +62,169 @@
             </div>
         </div>
     </section>
-    <section class="products">
+    <section class="products " id="products">
         <div class="container">
+            <div class="products-search-father">
+                <input placeholder="Пошук" class="products-search" type="text">
+            </div>
             <div class="products-border"></div>
-            <div class="products-buttons">
-                <a class="products-button" href="#">
-                    Всі Товари
-                </a>
-                <a class="products-button" href="#">
-                    Системні блоки
-                </a>
-                <a class="products-button" href="#">
-                    Ноутбуки
-                </a>
-                <a class="products-button" href="#">
-                    Аксесуари
-                </a>
-                <a class="products-button" href="#">
-                    Lorem
-                </a>
-                <a class="products-button" href="#">
-                    Lorem
-                </a>
-                <a class="products-button" href="#">
-                    Lorem
-                </a>
-                <a class="products-button" href="#">
-                    Lorem
-                </a>
-                <a class="products-button" href="#">
-                    Lorem
-                </a>
-            </div>
-            <div class="products-products">
-                <div class="products-product">
+            <ul class="products-list">
+                <li class="products-item">
+                    <button class="products-button products-line" href="#">
+                        Всі Товари
+                    </button>
+                </li>
+                <li class="products-item">
+                    <button class="products-button" href="#">
+                        Системні блоки
+                    </button>
+                </li>
+                <li class="products-item">
+                    <button class="products-button" href="#">
+                        Ноутбуки
+                    </button>
+                </li>
+                <li class="products-item">
+                    <button class="products-button" href="#">
+                        Аксесуари
+                    </button>
+                </li>
+                <li class="products-item">
+                    <button class="products-button" href="#">
+                        Lorem
+                    </button>
+                </li>
+                <li class="products-item">
+                    <button class="products-button" href="#">
+                        Lorem
+                    </button>
+                </li>
+                <li class="products-item">
+                    <button class="products-button" href="#">
+                        Lorem
+                    </button>
+                </li>
+                <li class="products-item">
+                    <button class="products-button" href="#">
+                        Lorem
+                    </button>
+                </li>
+                <li class="products-item">
+                    <button class="products-button" href="#">
+                        Lorem
+                    </button>
+                </li>
+            </ul>
+            <ul class="products-products">
+                <li class="products-product pc">
                     <img class="products-img"
                         src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
                         alt="">
-                    <h2 class="products-info">Lorem</h2>
+                    <h2 class="products-info">Системний блок</h2>
                     <p class="products-desc">Lorem Ipsum</p>
                     <h2 class="products-cost">$76.43</h2>
-                </div>
-                <div class="products-product">
+                </li>
+                <li class="products-product accessory">
                     <img class="products-img"
                         src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
                         alt="">
-                    <h2 class="products-info">Lorem</h2>
+                    <h2 class="products-info">Аксесуар</h2>
                     <p class="products-desc">Lorem Ipsum</p>
                     <h2 class="products-cost">$76.43</h2>
-                </div>
-                <div class="products-product">
+                </li>
+                <li class="products-product pc">
                     <img class="products-img"
                         src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
                         alt="">
-                    <h2 class="products-info">Lorem</h2>
+                    <h2 class="products-info">Системний блок</h2>
                     <p class="products-desc">Lorem Ipsum</p>
                     <h2 class="products-cost">$76.43</h2>
-                </div>
-                <div class="products-product">
+                </li>
+                <li class="products-product laptop">
                     <img class="products-img"
                         src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
                         alt="">
-                    <h2 class="products-info">Lorem</h2>
+                    <h2 class="products-info">Ноутбук</h2>
                     <p class="products-desc">Lorem Ipsum</p>
                     <h2 class="products-cost">$76.43</h2>
-                </div>
-            </div>
+                </li>
+                <li class="products-product accessory">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Аксесуар</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+                <li class="products-product pc">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Системний блок</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+                <li class="products-product accessory">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Аксесуар</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+                <li class="products-product pc">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Системний блок</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+                <li class="products-product laptop">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Ноутбук</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+                <li class="products-product accessory">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Аксесуар</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+                <li class="products-product pc">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Системний блок</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+                <li class="products-product laptop">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Ноутбук</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+                <li class="products-product accessory">
+                    <img class="products-img"
+                        src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png"
+                        alt="">
+                    <h2 class="products-info">Аксесуар</h2>
+                    <p class="products-desc">Lorem Ipsum</p>
+                    <h2 class="products-cost">$76.43</h2>
+                </li>
+            </ul>
+            <div class="pagination" style="text-align: right; margin-top: 20px;"></div>
         </div>
     </section>
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>
