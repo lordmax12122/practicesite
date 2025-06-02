@@ -136,7 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     const indexMap = {
                         'pc': 1,
                         'laptop': 2,
-                        'accessory': 3
+                        'accessory': 3,
+                        'server': 4
                     };
                     const button = document.querySelectorAll(".products-button")[indexMap[category]];
                     if (button) button.click();
@@ -151,22 +152,24 @@ document.addEventListener("DOMContentLoaded", function () {
             btn.classList.add("products-line");
 
             allProducts.forEach(product => {
-                const isLaptop = product.classList.contains("laptop");
-                const isPC = product.classList.contains("pc");
-                const isAccessory = product.classList.contains("accessory");
+                const category = product.querySelector(".products-info")?.textContent.toLowerCase().trim();
 
+                let show = false;
                 if (index === 0) {
-                    product.classList.remove("hidden");
-                } else if (index === 1 && isPC) {
-                    product.classList.remove("hidden");
-                } else if (index === 2 && isLaptop) {
-                    product.classList.remove("hidden");
-                } else if (index === 3 && isAccessory) {
-                    product.classList.remove("hidden");
-                } else {
-                    product.classList.add("hidden");
+                    show = true; // Всі товари
+                } else if (index === 1 && category === "pc") {
+                    show = true;
+                } else if (index === 2 && category === "laptop") {
+                    show = true;
+                } else if (index === 3 && category === "accessory") {
+                    show = true;
+                } else if (index === 4 && category === "server") {
+                    show = true;
                 }
+
+                product.classList.toggle("hidden", !show);
             });
+
 
             showPage(1);
         });
@@ -176,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const query = searchInput.value.toLowerCase();
 
         allProducts.forEach(product => {
-            const title = product.querySelector(".products-info")?.textContent.toLowerCase() || "";
+            const title = product.querySelector(".products-name")?.textContent.toLowerCase() || "";
             const desc = product.querySelector(".products-desc")?.textContent.toLowerCase() || "";
             const match = title.includes(query) || desc.includes(query);
 
@@ -236,4 +239,159 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     showPage(1);
+});
+
+// Отримуємо посилання на елементи модального вікна
+const modal = document.getElementById("productModal");
+const modalImg = document.getElementById("modal-image");
+const modalName = document.getElementById("modal-name");
+const modalInfo = document.getElementById("modal-info");
+const modalDesc = document.getElementById("modal-description");
+const modalCost = document.getElementById("modal-cost");
+const closeModalBtn = document.querySelector(".close-button");
+const slotsSelect = document.getElementById("slots-select");
+const processorsSelect = document.getElementById("processors-select");
+const ramsSelect = document.getElementById("rams-select");
+const powersSelect = document.getElementById("powers-select");
+const ssdsSelect = document.getElementById("ssds-select");
+
+document.querySelector(".products-products").addEventListener("click", function (e) {
+    const product = e.target.closest(".products-product");
+    if (!product) return;
+
+    const image = product.dataset.image;
+    const name = product.dataset.name;
+    const info = product.dataset.info;
+    const description = product.dataset.description;
+    const cost = product.dataset.cost;
+    const slotss = JSON.parse(product.dataset.slots);
+    const processorss = JSON.parse(product.dataset.processors);
+    const ramss = JSON.parse(product.dataset.rams);
+    const powerss = JSON.parse(product.dataset.powers);
+    const ssds = JSON.parse(product.dataset.ssds);
+
+    modalImg.src = image;
+    modalName.textContent = name;
+    modalInfo.textContent = `Тип: ${info}`;
+    modalDesc.textContent = `Опис: ${description}`;
+    modalCost.textContent = `Ціна: ${cost}`;
+
+    // ⬇️ ДОДАЙ СЮДИ!
+    modal.dataset.baseCost = parseFloat(cost.replace(/[^0-9.]/g, ""));
+
+    // Слоти
+    slotsSelect.innerHTML = "";
+    if (slotss.length > 0) {
+        slotss.forEach(slots => {
+            const option = document.createElement("option");
+            option.value = slots;
+            option.textContent = slots;
+            slotsSelect.appendChild(option);
+        });
+        slotsSelect.style.display = "block";
+    } else {
+        slotsSelect.style.display = "none";
+    }
+
+    // Процесори
+    processorsSelect.innerHTML = "";
+    if (processorss.length > 0) {
+        processorss.forEach(processor => {
+            const option = document.createElement("option");
+            option.value = processor.price;
+            option.textContent = processor.name;
+            option.dataset.price = processor.price;
+            processorsSelect.appendChild(option);
+        });
+        processorsSelect.style.display = "block";
+    } else {
+        processorsSelect.style.display = "none";
+    }
+
+    // RAM
+    ramsSelect.innerHTML = "";
+    if (ramss.length > 0) {
+        ramss.forEach(rams => {
+            const option = document.createElement("option");
+            option.value = rams;
+            option.textContent = rams;
+            ramsSelect.appendChild(option);
+        });
+        ramsSelect.style.display = "block";
+    } else {
+        ramsSelect.style.display = "none";
+    }
+
+    powersSelect.innerHTML = "";
+    if (powerss.length > 0) {
+        powerss.forEach(power => {
+            const option = document.createElement("option");
+            option.value = power.name;
+            option.textContent = power.name;
+            option.dataset.price = power.price;
+            powersSelect.appendChild(option);
+        });
+        powersSelect.style.display = "block";
+    } else {
+        powersSelect.style.display = "none";
+    }
+
+    ssdsSelect.innerHTML = "";
+    if (ssds.length > 0) {
+        ssds.forEach(ssd => {
+            const option = document.createElement("option");
+            option.value = ssd.name;
+            option.textContent = ssd.name;
+            option.dataset.price = ssd.price;
+            ssdsSelect.appendChild(option);
+        });
+        ssdsSelect.style.display = "block";
+    } else {
+        ssdsSelect.style.display = "none";
+    }
+
+    modal.style.display = "flex";
+
+});
+
+// Закриття модального вікна
+closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+});
+
+processorsSelect.addEventListener("change", () => {
+    const selectedOption = processorsSelect.selectedOptions[0];
+    const extra = parseFloat(selectedOption.dataset.price || "0");
+    const baseCostText = modal.dataset.baseCost || "0";
+    const baseCost = parseFloat(baseCostText);
+
+    const newPrice = baseCost + extra;
+    modalCost.textContent = `Ціна: $${newPrice % 1 === 0 ? newPrice.toFixed(0) : newPrice.toFixed(2)}`;
+
+    modalCost.textContent = `Ціна: ${newPrice}UAH`;
+});
+
+powersSelect.addEventListener("change", () => {
+    const selectedPower = powersSelect.selectedOptions[0];
+    const extra = parseFloat(selectedPower.dataset.price || "0");
+    const baseCostText = modal.dataset.baseCost || "0";
+    const baseCost = parseFloat(baseCostText);
+
+    const newPrice = baseCost + extra;
+
+    modalCost.textContent = `Ціна: $${newPrice % 1 === 0 ? newPrice.toFixed(0) : newPrice.toFixed(2)}`;
+});
+
+ssdsSelect.addEventListener("change", () => {
+    const selectedPower = ssdsSelect.selectedOptions[0];
+    const extra = parseFloat(selectedPower.dataset.price || "0");
+    const baseCostText = modal.dataset.baseCost || "0";
+    const baseCost = parseFloat(baseCostText);
+
+    const newPrice = baseCost + extra;
+
+    modalCost.textContent = `Ціна: $${newPrice % 1 === 0 ? newPrice.toFixed(0) : newPrice.toFixed(2)}`;
 });
