@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
             showPage(1);
         });
     });
+    
 
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
@@ -394,4 +395,49 @@ ssdsSelect.addEventListener("change", () => {
     const newPrice = baseCost + extra;
 
     modalCost.textContent = `Ціна: $${newPrice % 1 === 0 ? newPrice.toFixed(0) : newPrice.toFixed(2)}`;
+});
+
+
+(() => {
+    const refs = {
+      openModalBtn: document.querySelector("[burger-modal-open]"),
+      closeModalBtn: document.querySelector("[burger-modal-close]"),
+      modal: document.querySelector("[burger-modal]"),
+    };
+  
+    refs.openModalBtn.addEventListener("click", toggleModal);
+    refs.closeModalBtn.addEventListener("click", toggleModal);
+  
+    function toggleModal() {
+      refs.modal.classList.toggle("is-hidden");
+      document.body.classList.toggle("no-scroll");
+    }
+  })();
+
+const burger = document.querySelector(".burger-menu");
+
+  // Категорії в модалці — обробка кліку
+document.body.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal-category-btn")) {
+    const category = e.target.dataset.category;
+    if (!category) return;
+
+    burger.classList.add("is-hidden");
+document.body.classList.remove("no-scroll");
+
+    document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
+
+    setTimeout(() => {
+      const indexMap = {
+        pc: 1,
+        laptop: 2,
+        accessory: 3,
+        server: 4
+      };
+
+      const filterButtons = document.querySelectorAll(".products-button");
+      const btnToClick = filterButtons[indexMap[category]];
+      if (btnToClick) btnToClick.click();
+    }, 300);
+  }
 });

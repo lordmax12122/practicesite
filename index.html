@@ -17,6 +17,8 @@
             <div class="first-header">
                 <h2 class="header-logo">BrandComputers</h2>
                 <h2 class="header-phone">38000000000</h2>
+                <button burger-modal-open class="header-burger">
+                    <img class="header-home" width="40px" src="./img/burger-menu-svgrepo-com.png" alt="">
             </div>
         </div>
         <section class="down-header">
@@ -79,27 +81,22 @@
                     </button>
                 </li>
                 <li class="products-item">
-                    <button class="products-button" href="#">
+                    <button class="products-a products-two products-button" href="#">
                         Ноутбуки
                     </button>
                 </li>
                 <li class="products-item">
-                    <button class="products-button" href="#">
+                    <button class="products-two products-button" href="#">
                         Аксесуари
                     </button>
                 </li>
                 <li class="products-item">
-                    <button class="products-button" href="#">
+                    <button class="products-three products-button" href="#">
                         Сервери
                     </button>
                 </li>
                 <li class="products-item">
-                    <button class="products-button" href="#">
-                        Lorem
-                    </button>
-                </li>
-                <li class="products-item">
-                    <button class="products-button" href="#">
+                    <button class="products-three products-button" href="#">
                         Lorem
                     </button>
                 </li>
@@ -111,7 +108,9 @@
     </section>
     <div class="modal" id="productModal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
+            <div class="modal-header">
+                <span class="close-button">&times;</span>
+            </div>
             <div class="all-info-box">
                 <div class="img-box">
                     <img id="modal-image" src="" alt="Product Image">
@@ -146,6 +145,28 @@
                     <select id="ssds-select" style="display: none;"></select>
                 </li>
             </ul>
+        </div>
+    </div>
+    <div burger-modal class="burger-menu is-hidden">
+        <div class="burger">
+            <div class="modal-categories">
+                    <a class="modal-category-btn" data-category="pc">Комп'ютери</a>
+                    <a class="modal-category-btn" data-category="laptop">Ноутбуки</a>
+                    <a class="modal-category-btn" data-category="accessory">Аксесуари</a>
+            </div>
+            <div class="burger-box">
+                <ul class="burger-contact-list">
+                    <li class="burger-contact-item">
+                        <a href="tel:+380961111111" class="burger-tel">+38 096 111 11 11</a>
+                    </li>
+                    <li class="burger-contact-item">
+                        <a href="mailto:info@devstudio.com" class="burger-address">info@devstudio.com</a>
+                    </li>
+                </ul>
+                <button burger-modal-close class="burger-btn">
+                    <img class="burger-svg" width="40" height="40" src="./img/times-svgrepo-com.png" alt="">
+                </button>
+            </div>
         </div>
     </div>
     <script type="module" src="./index.js"></script>
