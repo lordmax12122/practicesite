@@ -4,11 +4,11 @@
 // const productItem = document.querySelectorAll(".products-item")
 // const laptops = document.querySelectorAll(".laptop")
 // const pcs = document.querySelectorAll(".pc")
-// const accessories = document.querySelectorAll(".accessory")
+// const accessories = document.querySelectorAll(".printers")
 
 // productButton[0].addEventListener("click", () => {
 //     laptops.forEach(laptop => laptop.classList.remove("hidden"))
-//     accessories.forEach(accessory => accessory.classList.remove("hidden"))
+//     accessories.forEach(printers => printers.classList.remove("hidden"))
 //     pcs.forEach(pc => pc.classList.remove("hidden"))
 //     productButton.forEach(btn => btn.classList.remove("products-line"))
 //     productButton[0].classList.add("products-line")
@@ -16,7 +16,7 @@
 
 // productButton[1].addEventListener("click", () => {
 //     laptops.forEach(laptop => laptop.classList.add("hidden"))
-//     accessories.forEach(accessory => accessory.classList.add("hidden"))
+//     accessories.forEach(printers => printers.classList.add("hidden"))
 //     pcs.forEach(pc => pc.classList.remove("hidden"))
 //     productButton.forEach(btn => btn.classList.remove("products-line"))
 //     productButton[1].classList.add("products-line")
@@ -24,7 +24,7 @@
 
 // productButton[2].addEventListener("click", () => {
 //     laptops.forEach(laptop => laptop.classList.remove("hidden"))
-//     accessories.forEach(accessory => accessory.classList.add("hidden"))
+//     accessories.forEach(printers => printers.classList.add("hidden"))
 //     pcs.forEach(pc => pc.classList.add("hidden"))
 //     productButton.forEach(btn => btn.classList.remove("products-line"))
 //     productButton[2].classList.add("products-line")
@@ -32,7 +32,7 @@
 
 // productButton[3].addEventListener("click", () => {
 //     laptops.forEach(laptop => laptop.classList.add("hidden"))
-//     accessories.forEach(accessory => accessory.classList.remove("hidden"))
+//     accessories.forEach(printers => printers.classList.remove("hidden"))
 //     pcs.forEach(pc => pc.classList.add("hidden"))
 //     productButton.forEach(btn => btn.classList.remove("products-line"))
 //     productButton[3].classList.add("products-line")
@@ -136,8 +136,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     const indexMap = {
                         'pc': 1,
                         'laptop': 2,
-                        'accessory': 3,
-                        'server': 4
+                        'printers': 3,
+                        'server': 4,
+                        'monitors': 5,
+                        'workstations': 6
                     };
                     const button = document.querySelectorAll(".products-button")[indexMap[category]];
                     if (button) button.click();
@@ -161,9 +163,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     show = true;
                 } else if (index === 2 && category === "laptop") {
                     show = true;
-                } else if (index === 3 && category === "accessory") {
+                } else if (index === 3 && category === "printers") {
                     show = true;
                 } else if (index === 4 && category === "server") {
+                    show = true;
+                } else if (index === 5 && category === "monitors") {
+                    show = true;
+                } else if (index === 6 && category === "workstations") {
                     show = true;
                 }
 
@@ -244,6 +250,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Отримуємо посилання на елементи модального вікна
 const modal = document.getElementById("productModal");
+const slotSelect = document.querySelector(".slot-select")
+const processorSelect = document.querySelector(".processor-select")
+const ramSelect = document.querySelector(".ram-select")
+const powerSelect = document.querySelector(".power-select")
+const ssdSelect = document.querySelector(".ssd-select")
 const modalImg = document.getElementById("modal-image");
 const modalName = document.getElementById("modal-name");
 const modalInfo = document.getElementById("modal-info");
@@ -290,8 +301,10 @@ document.querySelector(".products-products").addEventListener("click", function 
             slotsSelect.appendChild(option);
         });
         slotsSelect.style.display = "block";
+        slotSelect.style.display = "block";
     } else {
         slotsSelect.style.display = "none";
+        slotSelect.style.display = "none";
     }
 
     // Процесори
@@ -305,8 +318,10 @@ document.querySelector(".products-products").addEventListener("click", function 
             processorsSelect.appendChild(option);
         });
         processorsSelect.style.display = "block";
+        processorSelect.style.display = "block";
     } else {
         processorsSelect.style.display = "none";
+        processorSelect.style.display = "none";
     }
 
     // RAM
@@ -314,13 +329,16 @@ document.querySelector(".products-products").addEventListener("click", function 
     if (ramss.length > 0) {
         ramss.forEach(rams => {
             const option = document.createElement("option");
-            option.value = rams;
-            option.textContent = rams;
+            option.value = rams.name;
+        option.textContent = rams.name;
+        option.dataset.price = rams.price;
             ramsSelect.appendChild(option);
         });
         ramsSelect.style.display = "block";
+        ramSelect.style.display = "block";
     } else {
         ramsSelect.style.display = "none";
+        ramSelect.style.display = "none";
     }
 
     powersSelect.innerHTML = "";
@@ -333,8 +351,10 @@ document.querySelector(".products-products").addEventListener("click", function 
             powersSelect.appendChild(option);
         });
         powersSelect.style.display = "block";
+        powerSelect.style.display = "block";
     } else {
         powersSelect.style.display = "none";
+        powerSelect.style.display = "none";
     }
 
     ssdsSelect.innerHTML = "";
@@ -347,8 +367,10 @@ document.querySelector(".products-products").addEventListener("click", function 
             ssdsSelect.appendChild(option);
         });
         ssdsSelect.style.display = "block";
+         ssdSelect.style.display = "block";
     } else {
         ssdsSelect.style.display = "none";
+        ssdSelect.style.display = "none";
     }
 
     modal.style.display = "flex";
@@ -397,6 +419,17 @@ ssdsSelect.addEventListener("change", () => {
     modalCost.textContent = `Ціна: $${newPrice % 1 === 0 ? newPrice.toFixed(0) : newPrice.toFixed(2)}`;
 });
 
+ramsSelect.addEventListener("change", () => {
+    const selectedPower = ramsSelect.selectedOptions[0];
+    const extra = parseFloat(selectedPower.dataset.price || "0");
+    const baseCostText = modal.dataset.baseCost || "0";
+    const baseCost = parseFloat(baseCostText);
+
+    const newPrice = baseCost + extra;
+
+    modalCost.textContent = `Ціна: $${newPrice % 1 === 0 ? newPrice.toFixed(0) : newPrice.toFixed(2)}`;
+});
+
 
 (() => {
     const refs = {
@@ -431,8 +464,10 @@ document.body.classList.remove("no-scroll");
       const indexMap = {
         pc: 1,
         laptop: 2,
-        accessory: 3,
-        server: 4
+        printers: 3,
+        server: 4,
+        monitors: 5,
+        workstations: 6
       };
 
       const filterButtons = document.querySelectorAll(".products-button");

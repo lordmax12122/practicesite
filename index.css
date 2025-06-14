@@ -806,7 +806,11 @@ html {
   justify-content: center;
 }
 
-.product-select {
+.ram-select,
+.slot-select,
+.processor-select,
+.power-select,
+.ssd-select {
   color: #8E8E8E;
   position: relative;
   text-align: center;
